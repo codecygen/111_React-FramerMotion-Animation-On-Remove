@@ -1,3 +1,5 @@
+// Collapse Animation When a Box is Deleted in a Box List
+
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Box from "./Box";
@@ -23,7 +25,7 @@ const BoxList = () => {
             layoutTransition={{ duration: 0.05 }} // Optionally, customize the layout transition
             initial={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "-100%" }}
-            animate={{ y: 10 * index }} // Adjust the value based on your preference
+            animate={{ y: 10 * index }} // Adjust the value based on your preference // Slide upward Animation on Page Load
             transition={{ duration: 0.3 }}
           >
             <Box data={data} onDelete={() => handleDelete(index)} />

@@ -1,3 +1,5 @@
+// Collapse Animation When a Box is Deleted in a Box List
+
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
