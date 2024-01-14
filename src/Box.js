@@ -1,5 +1,3 @@
-// Collapse Animation When a Box is Deleted in a Box List
-
 import React from "react";
 
 const Box = ({ data, onDelete }) => {
