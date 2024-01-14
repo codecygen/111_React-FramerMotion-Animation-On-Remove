@@ -17,10 +17,7 @@ const BoxList = () => {
 
   const handleAdd = () => {
     const lastNumber = boxes[0].split(" ")[1];
-    // console.log(lastNumber);
     const newBoxName = `Box ${+lastNumber + 1}`;
-
-    // console.log(boxes);
 
     setBoxes((prevBoxes) => [newBoxName, ...prevBoxes]);
   };
