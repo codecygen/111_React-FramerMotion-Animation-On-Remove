@@ -1,3 +1,4 @@
+// Slide In Animation to the First Order in List When a New Box is Added
 // Collapse Animation When a Box is Deleted in a Box List
 
 import React, { useState } from "react";
@@ -7,7 +8,9 @@ import Box from "./Box";
 const BoxList = () => {
   const [boxes, setBoxes] = useState(["Box 2", "Box 1"]);
 
-  const [deleteAnimation, setDeleteAnimation] = useState(true);
+  // This is used to assess if the remove box and refresh animations to be played
+  // or if add new item animation to be played.
+  const [isOnMount, setIsOnMount] = useState(true);
 
   const handleDelete = (index) => {
     setBoxes((prevBoxes) => {
@@ -16,7 +19,7 @@ const BoxList = () => {
       return newBoxes;
     });
 
-    setDeleteAnimation(true);
+    setIsOnMount(true);
   };
 
   const handleAdd = () => {
@@ -31,7 +34,7 @@ const BoxList = () => {
 
     setBoxes((prevBoxes) => [newBoxName, ...prevBoxes]);
 
-    setDeleteAnimation(false);
+    setIsOnMount(false);
   };
 
   return (
@@ -43,17 +46,27 @@ const BoxList = () => {
             <motion.div
               key={data} // Ensure each box has a unique key
               layout // Add this prop to enable layout animation
-              layoutTransition={{ duration: 0.05 }} // Optionally, customize the layout transition
+              layoutTransition={{ duration: 1 }} // Optionally, customize the layout transition
+              // Initial state defines the initial state of the mounted component
+              // when it is first mounted
+              // If we add a new item (!isOnMount), initial state of the newly mounted item
+              // (added item) will be outside the page with opacity of 0.
               initial={
-                deleteAnimation
+                isOnMount
                   ? { opacity: 1, x: 0 }
                   : { opacity: 0, x: "-100%" }
               }
-              exit={{ opacity: 0, x: "-100%" }}
-              // Slide upward Animation on Page Load
+              // This is about what the actual animation will be
+              // Since initially isOnMount is set to true
+              // All items will make move upward by 10px when components mounted (page refreshed)
+              // If we add a new item (!isOnMount), it will be brought to the place where its supposed to be
+              // from the initial state.
               animate={
-                deleteAnimation ? { y: 10 } : { opacity: 1, x: 0, y: 10 }
-              } // Adjust the value based on your preference
+                isOnMount ? { y: 10 } : { opacity: 1, x: 0, y: 10 }
+              }
+              // This is the animation to be performed when a component is removed.
+              exit={{ opacity: 0, x: "-100%" }}
+              // This is the animation duration
               transition={{ duration: 0.3 }}
             >
               <Box data={data} onDelete={() => handleDelete(index)} />
