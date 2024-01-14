@@ -1,7 +1,6 @@
 // Collapse Animation When a Box is Deleted in a Box List
 
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const Box = ({ data, onDelete }) => {
   const handleDelete = () => {
@@ -9,16 +8,10 @@ const Box = ({ data, onDelete }) => {
   };
 
   return (
-    <AnimatePresence>
-      <motion.div
-        key={data} // Ensure each box has a unique key
-      >
-        <div className="box">
-          <p>{data}</p>
-          <button onClick={handleDelete}>Delete</button>
-        </div>
-      </motion.div>
-    </AnimatePresence>
+    <div className="box">
+      <p>{data}</p>
+      <button onClick={handleDelete}>Delete</button>
+    </div>
   );
 };
 
