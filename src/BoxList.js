@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Box from "./Box";
 
 const BoxList = () => {
-  const [boxes, setBoxes] = useState(["Box 1", "Box 2"]);
+  const [boxes, setBoxes] = useState(["Box 2", "Box 1"]);
 
   const handleDelete = (index) => {
     setBoxes((prevBoxes) => {
@@ -18,7 +18,7 @@ const BoxList = () => {
   const handleAdd = () => {
     let newBoxName;
 
-    if (boxes[0]) {
+    if (boxes.length && boxes[0]) {
       const lastNumber = boxes[0].split(" ")[1];
       newBoxName = `Box ${+lastNumber + 1}`;
     } else {
