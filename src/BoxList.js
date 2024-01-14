@@ -20,7 +20,6 @@ const BoxList = () => {
 
     if (boxes[0]) {
       const lastNumber = boxes[0].split(" ")[1];
-
       newBoxName = `Box ${+lastNumber + 1}`;
     } else {
       newBoxName = "Box 1";
