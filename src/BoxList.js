@@ -7,12 +7,16 @@ import Box from "./Box";
 const BoxList = () => {
   const [boxes, setBoxes] = useState(["Box 2", "Box 1"]);
 
+  const [deleteAnimation, setDeleteAnimation] = useState(true);
+
   const handleDelete = (index) => {
     setBoxes((prevBoxes) => {
       const newBoxes = [...prevBoxes];
       newBoxes.splice(index, 1);
       return newBoxes;
     });
+
+    setDeleteAnimation(true);
   };
 
   const handleAdd = () => {
@@ -26,26 +30,46 @@ const BoxList = () => {
     }
 
     setBoxes((prevBoxes) => [newBoxName, ...prevBoxes]);
+
+    setDeleteAnimation(false);
   };
 
   return (
     <div className="box-list">
       <button onClick={handleAdd}>Add a Box</button>
       <AnimatePresence>
-        {boxes.map((data, index) => (
-          <motion.div
-            key={data} // Ensure each box has a unique key
-            layout // Add this prop to enable layout animation
-            layoutTransition={{ duration: 0.05 }} // Optionally, customize the layout transition
-            initial={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "-100%" }}
-            // Slide upward Animation on Page Load
-            animate={{ y: 10 }} // Adjust the value based on your preference
-            transition={{ duration: 0.3 }}
-          >
-            <Box data={data} onDelete={() => handleDelete(index)} />
-          </motion.div>
-        ))}
+        {boxes.map((data, index) => {
+          if (deleteAnimation) {
+            return (
+              <motion.div
+                key={data} // Ensure each box has a unique key
+                layout // Add this prop to enable layout animation
+                layoutTransition={{ duration: 0.05 }} // Optionally, customize the layout transition
+                initial={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: "-100%" }}
+                // Slide upward Animation on Page Load
+                animate={{ y: 10 }} // Adjust the value based on your preference
+                transition={{ duration: 0.3 }}
+              >
+                <Box data={data} onDelete={() => handleDelete(index)} />
+              </motion.div>
+            );
+          } else {
+            return (
+              <motion.div
+                key={data} // Ensure each box has a unique key
+                layout // Add this prop to enable layout animation
+                layoutTransition={{ duration: 1 }}
+                initial={{ opacity: 0, x: "-100%" }}
+                animate={{ opacity: 1, x: 0, y: 10 }}
+                exit={{ opacity: 0, x: "-100%" }}
+                transition={{ duration: 0.3 }}
+              >
+                <Box data={data} onDelete={() => handleDelete(index)} />
+              </motion.div>
+            );
+          }
+        })}
       </AnimatePresence>
     </div>
   );
