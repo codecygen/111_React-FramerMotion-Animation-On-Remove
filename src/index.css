@@ -28,6 +28,15 @@ code {
   overflow: hidden; /* Ensure contents don't overflow during animation */
 }
 
+.flex {
+  display: flex;
+  flex-direction: column;
+
+  & > button {
+    margin: 0 auto 10px;
+  }
+}
+
 button {
   width: 100px;
   margin: auto;

@@ -1,7 +1,7 @@
 // Slide In Animation to the First Order in List When a New Box is Added
 // Collapse Animation When a Box is Deleted in a Box List
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Box from "./Box";
 

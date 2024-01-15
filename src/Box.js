@@ -1,5 +1,3 @@
-import React from "react";
-
 const Box = ({ data, onDelete }) => {
   const handleDelete = () => {
     onDelete();
@@ -8,7 +6,10 @@ const Box = ({ data, onDelete }) => {
   return (
     <div className="box">
       <p>{data}</p>
-      <button onClick={handleDelete}>Delete</button>
+      <div className="flex">
+        <button>Edit</button>
+        <button onClick={handleDelete}>Delete</button>
+      </div>
     </div>
   );
 };
