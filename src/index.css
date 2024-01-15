@@ -26,6 +26,26 @@ code {
   width: 200px;
   margin: 10px auto;
   overflow: hidden; /* Ensure contents don't overflow during animation */
+
+  
+}
+
+.box-edited {
+  animation: color-change 0.5s ease-in-out;
+}
+
+@keyframes color-change {
+  0% {
+    background-color: yellow;
+  }
+
+  50% {
+    background-color: green;
+  }
+
+  100% {
+    background-color: white;
+  }
 }
 
 .flex {

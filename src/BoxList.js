@@ -52,24 +52,23 @@ const BoxList = () => {
               // If we add a new item (!isOnMount), initial state of the newly mounted item
               // (added item) will be outside the page with opacity of 0.
               initial={
-                isOnMount
-                  ? { opacity: 1, x: 0 }
-                  : { opacity: 0, x: "-100%" }
+                isOnMount ? { opacity: 1, x: 0 } : { opacity: 0, x: "-100%" }
               }
               // This is about what the actual animation will be
               // Since initially isOnMount is set to true
               // All items will make move upward by 10px when components mounted (page refreshed)
               // If we add a new item (!isOnMount), it will be brought to the place where its supposed to be
               // from the initial state.
-              animate={
-                isOnMount ? { y: 10 } : { opacity: 1, x: 0, y: 10 }
-              }
+              animate={isOnMount ? { y: 10 } : { opacity: 1, x: 0, y: 10 }}
               // This is the animation to be performed when a component is removed.
               exit={{ opacity: 0, x: "-100%" }}
               // This is the animation duration
               transition={{ duration: 0.3 }}
             >
-              <Box data={data} onDelete={() => handleDelete(index)} />
+              <Box
+                data={data}
+                onDelete={() => handleDelete(index)}
+              />
             </motion.div>
           );
         })}
